@@ -25,3 +25,4 @@ allow_duplicate = false
 strip_outer_array = true
 strip_null_values = false 
 ignore_utf8_errors = false;
+
