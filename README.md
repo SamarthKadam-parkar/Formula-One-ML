@@ -4,4 +4,4 @@
 ###  2. High Chance
 ###  3. Moderate Chance
 ###  4. Low Chance
-###  5. Vey Low Chance.###
+###  5. Vey Low Chance
