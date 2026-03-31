@@ -1,0 +1,138 @@
+table SESSIONS
+	lineageTag: 09cf5152-61c7-44f7-bb04-7f50f49e0b84
+
+	column MEETING_KEY
+		dataType: double
+		lineageTag: 8c30625b-2fa5-4b87-804a-161ee36d1497
+		summarizeBy: none
+		sourceColumn: MEETING_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SESSION_KEY
+		dataType: double
+		lineageTag: c152774d-91dd-4619-bb9c-152a07f281f4
+		summarizeBy: none
+		sourceColumn: SESSION_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CIRCUIT_KEY
+		dataType: double
+		lineageTag: b5a52a8f-9182-4410-b38a-ad99f4a2e956
+		summarizeBy: sum
+		sourceColumn: CIRCUIT_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CIRCUIT_SHORT_NAME
+		dataType: string
+		lineageTag: 0e02005e-a906-4530-bb88-445ecf2e7d94
+		summarizeBy: none
+		sourceColumn: CIRCUIT_SHORT_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTRY_CODE
+		dataType: string
+		lineageTag: ae2f7bc4-fc31-48c9-b1cd-4f7835e45255
+		summarizeBy: none
+		sourceColumn: COUNTRY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTRY_KEY
+		dataType: double
+		lineageTag: b6345435-2050-4b61-9fb6-0a4f35087486
+		summarizeBy: sum
+		sourceColumn: COUNTRY_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COUNTRY_NAME
+		dataType: string
+		lineageTag: a9ee1c15-df89-4814-8480-827368c7de6e
+		summarizeBy: none
+		sourceColumn: COUNTRY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column DATE_END
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 6f19c430-fc49-4926-93b4-d18b4f73d514
+		summarizeBy: none
+		sourceColumn: DATE_END
+
+		annotation SummarizationSetBy = Automatic
+
+	column DATE_START
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c40c6322-008f-4a2b-9489-657add12a9e3
+		summarizeBy: none
+		sourceColumn: DATE_START
+
+		annotation SummarizationSetBy = Automatic
+
+	column GMT_OFFSE
+		dataType: string
+		lineageTag: b2aef91a-ff5b-4071-a57e-ec9ecf703d27
+		summarizeBy: none
+		sourceColumn: GMT_OFFSE
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOCATION
+		dataType: string
+		lineageTag: 2445b072-446f-483d-9d3f-1ce25e33f8d9
+		summarizeBy: none
+		sourceColumn: LOCATION
+
+		annotation SummarizationSetBy = Automatic
+
+	column SESSION_NAME
+		dataType: string
+		lineageTag: e006946c-c605-417d-a317-4bc47bfd2e38
+		summarizeBy: none
+		sourceColumn: SESSION_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SESSSION_TYPE
+		dataType: string
+		lineageTag: 5c0ac322-e0d8-438e-b293-f261b95252fa
+		summarizeBy: none
+		sourceColumn: SESSSION_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column YEAR
+		dataType: double
+		lineageTag: 44a82d60-0480-4245-81ba-c14ab5a4e471
+		summarizeBy: sum
+		sourceColumn: YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition SESSIONS = m
+		mode: directQuery
+		source =
+				let
+				    Source = Snowflake.Databases("NEBWAYZ-WE00194.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    F1_ANALYTICS_Database = Source{[Name="F1_ANALYTICS",Kind="Database"]}[Data],
+				    GOLD_Schema = F1_ANALYTICS_Database{[Name="GOLD",Kind="Schema"]}[Data],
+				    SESSIONS_Table = GOLD_Schema{[Name="SESSIONS",Kind="Table"]}[Data]
+				in
+				    SESSIONS_Table
+

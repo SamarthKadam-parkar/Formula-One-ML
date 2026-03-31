@@ -1,0 +1,62 @@
+table DRIVERS
+	lineageTag: cc72611d-91ca-4d58-8e06-ae82fb7dce94
+
+	column BROADCAST_NAME
+		dataType: string
+		lineageTag: 39152542-bee8-4fee-9714-93037f9d7bbe
+		summarizeBy: none
+		sourceColumn: BROADCAST_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column DRIVER_NUMBER
+		dataType: string
+		lineageTag: dff471b0-96e8-4b31-89b6-bb1b568f5c4d
+		summarizeBy: none
+		sourceColumn: DRIVER_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column FULL_NAME
+		dataType: string
+		lineageTag: fb146b2f-bdc3-4f18-bbc4-fda1de0975c3
+		summarizeBy: none
+		sourceColumn: FULL_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column NAME_ACRONYM
+		dataType: string
+		lineageTag: 1b3426d6-e43f-4db8-bf4e-9ef6438bce0b
+		summarizeBy: none
+		sourceColumn: NAME_ACRONYM
+
+		annotation SummarizationSetBy = Automatic
+
+	column TEAM_NAME
+		dataType: string
+		lineageTag: c8a39359-f40d-4dfa-9f89-a69dcba4aa47
+		summarizeBy: none
+		sourceColumn: TEAM_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column HEADSHOT_URL
+		dataType: string
+		lineageTag: 116a1a29-a413-4443-9453-07440dce7061
+		summarizeBy: none
+		sourceColumn: HEADSHOT_URL
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DRIVERS = m
+		mode: directQuery
+		source =
+				let
+				    Source = Snowflake.Databases("NEBWAYZ-WE00194.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    F1_ANALYTICS_Database = Source{[Name="F1_ANALYTICS",Kind="Database"]}[Data],
+				    GOLD_Schema = F1_ANALYTICS_Database{[Name="GOLD",Kind="Schema"]}[Data],
+				    DRIVERS_Table = GOLD_Schema{[Name="DRIVERS",Kind="Table"]}[Data]
+				in
+				    DRIVERS_Table
+

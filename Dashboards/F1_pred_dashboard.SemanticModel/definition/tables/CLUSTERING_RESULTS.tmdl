@@ -1,0 +1,120 @@
+table CLUSTERING_RESULTS
+	lineageTag: 91b44a34-f2e9-48f8-b25e-9afd9c5c9ad1
+
+	column SESSION_KEY
+		dataType: double
+		sourceProviderType: decimal(38, 0)
+		lineageTag: 33b48f0f-20bc-4d39-ab23-b91b718f3931
+		summarizeBy: none
+		sourceColumn: SESSION_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column POSITION
+		dataType: double
+		sourceProviderType: decimal(38, 0)
+		lineageTag: 3d1a84e7-8aff-4eff-92ef-16c78ebc74d8
+		summarizeBy: sum
+		sourceColumn: POSITION
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NUMBER_OF_LAPS
+		dataType: double
+		sourceProviderType: decimal(38, 0)
+		lineageTag: 9e7b0909-4d98-4303-abc4-d6612cd49fc7
+		summarizeBy: sum
+		sourceColumn: NUMBER_OF_LAPS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DRIVER_NUMBER
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 7e4b1e9a-e1a2-4e99-9d30-a0c7b1b28fc6
+		summarizeBy: none
+		sourceColumn: DRIVER_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column AVG_QUALI_TIME
+		dataType: double
+		sourceProviderType: double
+		lineageTag: 1ae5cf77-602e-4f8a-9def-6d8c9c0bb769
+		summarizeBy: sum
+		sourceColumn: AVG_QUALI_TIME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FASTEST_QUALIFYING_TIME
+		dataType: double
+		sourceProviderType: double
+		lineageTag: baf666a9-fa09-4e66-b284-ba2c5f0d99f8
+		summarizeBy: sum
+		sourceColumn: FASTEST_QUALIFYING_TIME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column WINNER_FALG
+		dataType: double
+		sourceProviderType: decimal(38, 0)
+		lineageTag: 81e2348c-6050-47f5-934d-2d4df5c0af7d
+		summarizeBy: sum
+		sourceColumn: WINNER_FALG
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column cluster
+		dataType: double
+		sourceProviderType: decimal(38, 0)
+		lineageTag: f93cdf0c-86e7-4be0-ab95-c913ea60c0d4
+		summarizeBy: sum
+		sourceColumn: cluster
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column win_category
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: 48cd9fb6-bf80-4463-a270-f0f90b582dbf
+		summarizeBy: none
+		sourceColumn: win_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column performance_score
+		dataType: double
+		sourceProviderType: double
+		lineageTag: d9be79d3-a34a-4963-b56f-7d79f8cf4f02
+		summarizeBy: sum
+		sourceColumn: performance_score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition CLUSTERING_RESULTS = m
+		mode: directQuery
+		source =
+				let
+				    Source = Snowflake.Databases("NEBWAYZ-WE00194.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    F1_ANALYTICS_Database = Source{[Name="F1_ANALYTICS",Kind="Database"]}[Data],
+				    GOLD_Schema = F1_ANALYTICS_Database{[Name="GOLD",Kind="Schema"]}[Data],
+				    CLUSTERING_RESULTS_Table = GOLD_Schema{[Name="CLUSTERING_RESULTS",Kind="Table"]}[Data]
+				in
+				    CLUSTERING_RESULTS_Table
+
