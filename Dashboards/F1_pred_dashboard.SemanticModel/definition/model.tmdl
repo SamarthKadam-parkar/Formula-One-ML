@@ -1,0 +1,23 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-IN
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["DRIVERS","QUALIFICATION_RESULTS","MEETINGS_SEASON_2026","SESSIONS","CLUSTERING_RESULTS","RECENT_MEETINGS"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DRIVERS
+ref table QUALIFICATION_RESULTS
+ref table MEETINGS_SEASON_2026
+ref table SESSIONS
+ref table CLUSTERING_RESULTS
+ref table RECENT_MEETINGS
+
+ref cultureInfo en-US
+

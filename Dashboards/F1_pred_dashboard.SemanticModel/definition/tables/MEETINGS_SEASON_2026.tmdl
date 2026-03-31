@@ -1,0 +1,152 @@
+table MEETINGS_SEASON_2026
+	lineageTag: 950bc7b1-530f-46ae-ad5d-716be054cfeb
+
+	column CIRCUIT_KEY
+		dataType: double
+		lineageTag: 6b6e5997-16cc-4184-85ad-bd62457cee0f
+		summarizeBy: none
+		sourceColumn: CIRCUIT_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CIRCUIT_INFO_URL
+		dataType: string
+		lineageTag: 003822a9-8031-4e87-959c-4acf970c3f2d
+		summarizeBy: none
+		sourceColumn: CIRCUIT_INFO_URL
+
+		annotation SummarizationSetBy = Automatic
+
+	column CIRCUIT_IMAGE
+		dataType: string
+		lineageTag: cf154ed7-8035-4ebc-b60a-ad97d1ef0d00
+		summarizeBy: none
+		sourceColumn: CIRCUIT_IMAGE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CIRCUIT_SHORT_NAME
+		dataType: string
+		lineageTag: ff788bf9-217a-4393-a402-6c6038ad7a0d
+		summarizeBy: none
+		sourceColumn: CIRCUIT_SHORT_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTRY_CODE
+		dataType: string
+		lineageTag: afbd6eaa-6381-484b-bc92-d68eeee9595c
+		summarizeBy: none
+		sourceColumn: COUNTRY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTRY_FLAG
+		dataType: string
+		lineageTag: 32492972-6ea6-48ea-852e-22070eb34e76
+		summarizeBy: none
+		sourceColumn: COUNTRY_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTRY_KEY
+		dataType: double
+		lineageTag: 21d1be97-40c5-41f4-a755-5f9a59bd4d2e
+		summarizeBy: none
+		sourceColumn: COUNTRY_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COUNTRY_NAME
+		dataType: string
+		lineageTag: dd413186-5d36-4c76-9704-a2e95f935f3e
+		summarizeBy: none
+		sourceColumn: COUNTRY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column DATE_END
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d23e56a5-4dcc-4887-b75a-8532340ee0ad
+		summarizeBy: none
+		sourceColumn: DATE_END
+
+		annotation SummarizationSetBy = Automatic
+
+	column DATE_START
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e9c4f32e-964a-4c0a-b6d4-c48c09b1e49b
+		summarizeBy: none
+		sourceColumn: DATE_START
+
+		annotation SummarizationSetBy = Automatic
+
+	column GMT_OFFSET
+		dataType: string
+		lineageTag: eed4677e-20c8-4b36-98af-6f23ce72bb99
+		summarizeBy: none
+		sourceColumn: GMT_OFFSET
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOCATION
+		dataType: string
+		lineageTag: f0666930-8f56-4eb8-9f16-df91fbb8ca2b
+		summarizeBy: none
+		sourceColumn: LOCATION
+
+		annotation SummarizationSetBy = Automatic
+
+	column MEETING_KEY
+		dataType: double
+		lineageTag: a11b30f6-76e0-4999-b182-c7285dd16c0b
+		summarizeBy: none
+		sourceColumn: MEETING_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MEETING_NAME
+		dataType: string
+		lineageTag: d39c8df1-f669-49bb-a2df-c1256820c7d5
+		summarizeBy: none
+		sourceColumn: MEETING_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column MEETING_OFFICIAL_NAME
+		dataType: string
+		lineageTag: 93bd43d5-7ae7-4375-b0a6-2c5fae3775a1
+		summarizeBy: none
+		sourceColumn: MEETING_OFFICIAL_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column YEAR
+		dataType: double
+		lineageTag: b8966855-1d7e-4bf5-85c7-59d9e89773b7
+		summarizeBy: none
+		sourceColumn: YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition MEETINGS_SEASON_2026 = m
+		mode: directQuery
+		source =
+				let
+				    Source = Snowflake.Databases("NEBWAYZ-WE00194.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    F1_ANALYTICS_Database = Source{[Name="F1_ANALYTICS",Kind="Database"]}[Data],
+				    GOLD_Schema = F1_ANALYTICS_Database{[Name="GOLD",Kind="Schema"]}[Data],
+				    MEETINGS_SEASON_2026_Table = GOLD_Schema{[Name="MEETINGS_SEASON_2026",Kind="Table"]}[Data]
+				in
+				    MEETINGS_SEASON_2026_Table
+

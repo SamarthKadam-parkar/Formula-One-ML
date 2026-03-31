@@ -1,0 +1,25 @@
+relationship 461badeb-8fc8-a9dd-1999-00ffe2bf97da
+	crossFilteringBehavior: bothDirections
+	fromColumn: QUALIFICATION_RESULTS.DRIVER_NUMBER
+	toColumn: DRIVERS.DRIVER_NUMBER
+
+relationship 83822abf-f9b5-6259-42ad-5ede0bc5b4f9
+	crossFilteringBehavior: bothDirections
+	fromColumn: SESSIONS.MEETING_KEY
+	toColumn: MEETINGS_SEASON_2026.MEETING_KEY
+
+relationship 2c38f9b5-d59d-2093-89ce-eda3ee31e516
+	crossFilteringBehavior: bothDirections
+	fromColumn: QUALIFICATION_RESULTS.SESSION_KEY
+	toColumn: SESSIONS.SESSION_KEY
+
+relationship 29ff9e91-f7b4-656d-9ab5-79e31a8e9282
+	crossFilteringBehavior: bothDirections
+	fromColumn: CLUSTERING_RESULTS.SESSION_KEY
+	toColumn: SESSIONS.SESSION_KEY
+
+relationship e503e7b2-0af2-6245-e278-b7b0987b414a
+	crossFilteringBehavior: bothDirections
+	fromColumn: SESSIONS.MEETING_KEY
+	toColumn: RECENT_MEETINGS.MEETING_KEY
+

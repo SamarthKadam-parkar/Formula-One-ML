@@ -1,0 +1,34 @@
+table RECENT_MEETINGS
+	lineageTag: 21bb4c21-4582-4c49-937e-3a6b59f6e45b
+
+	column MEETING_KEY
+		dataType: double
+		sourceProviderType: decimal(38, 0)
+		lineageTag: f56a0365-19a8-400a-b22f-8a591f504441
+		summarizeBy: none
+		sourceColumn: MEETING_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MEETING_NAME
+		dataType: string
+		sourceProviderType: nvarchar(16777216)
+		lineageTag: b7ef107d-227a-4ff7-be0a-f13804c3e689
+		summarizeBy: none
+		sourceColumn: MEETING_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	partition RECENT_MEETINGS = m
+		mode: directQuery
+		source =
+				let
+				    Source = Snowflake.Databases("NEBWAYZ-WE00194.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    F1_ANALYTICS_Database = Source{[Name="F1_ANALYTICS",Kind="Database"]}[Data],
+				    GOLD_Schema = F1_ANALYTICS_Database{[Name="GOLD",Kind="Schema"]}[Data],
+				    RECENT_MEETINGS_Table = GOLD_Schema{[Name="RECENT_MEETINGS",Kind="Table"]}[Data]
+				in
+				    RECENT_MEETINGS_Table
+

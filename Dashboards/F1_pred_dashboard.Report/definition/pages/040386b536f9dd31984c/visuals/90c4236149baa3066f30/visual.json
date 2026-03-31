@@ -1,0 +1,413 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "90c4236149baa3066f30",
+  "position": {
+    "x": 697.14217642504013,
+    "y": 60.3823932336649,
+    "z": 4,
+    "height": 639.50443742926916,
+    "width": 569.51575436297571,
+    "tabOrder": 4
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Dashboard Visuals",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "14pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "1. "
+                  },
+                  {
+                    "value": "Multi-Card Visual (Driver Stats)",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Displays "
+                  },
+                  {
+                    "value": "fastest lap",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ", "
+                  },
+                  {
+                    "value": "average lap time",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ", "
+                  },
+                  {
+                    "value": "Q1/Q2/Q3 times",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ", and "
+                  },
+                  {
+                    "value": "number of laps",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": " for the selected driver."
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Updates dynamically when you select a qualifying session from the slicer."
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "2. "
+                  },
+                  {
+                    "value": "Slicer (Qualifying Sessions)",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Allows you to choose a specific Grand Prix qualifying session."
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "When a session is selected, all visuals update to reflect that event."
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "3. "
+                  },
+                  {
+                    "value": "Matrix Visual (Top 5 Drivers)",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Shows the "
+                  },
+                  {
+                    "value": "top 5 drivers",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": " with the highest chances of achieving a podium finish."
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Columns include:"
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Driver Full Name",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  }
+                ],
+                "listType": "bullet",
+                "indent": 1
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Average Qualifying Time",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  }
+                ],
+                "listType": "bullet",
+                "indent": 1
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Fastest Qualifying Time",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  }
+                ],
+                "listType": "bullet",
+                "indent": 1
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Helps compare performance across drivers."
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "4. "
+                  },
+                  {
+                    "value": "K-Means Clustering Scatterplot (Python Visual)",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Plots drivers based on:"
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "X-axis:",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": " Average Qualifying Time"
+                  }
+                ],
+                "listType": "bullet",
+                "indent": 1
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Y-axis:",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": " Fastest Qualifying Time"
+                  }
+                ],
+                "listType": "bullet",
+                "indent": 1
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Drivers are grouped into clusters using "
+                  },
+                  {
+                    "value": "K-means clustering",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ":"
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Blue:",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": " Best Chance of Winning"
+                  }
+                ],
+                "listType": "bullet",
+                "indent": 1
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Green:",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": " High Chance"
+                  }
+                ],
+                "listType": "bullet",
+                "indent": 1
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Orange:",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": " Moderate Chance"
+                  }
+                ],
+                "listType": "bullet",
+                "indent": 1
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Red:",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": " Low Chance"
+                  }
+                ],
+                "listType": "bullet",
+                "indent": 1
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Purple:",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": " Very Low Chance"
+                  }
+                ],
+                "listType": "bullet",
+                "indent": 1
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Each point is labeled with driver abbreviations (e.g., ANT for Antonelli)."
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

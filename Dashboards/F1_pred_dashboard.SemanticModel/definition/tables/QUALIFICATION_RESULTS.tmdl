@@ -1,0 +1,170 @@
+table QUALIFICATION_RESULTS
+	lineageTag: f22965ef-624f-4a4a-99d2-cad8333c8fda
+
+	column SESSION_KEY
+		dataType: double
+		lineageTag: d552bff5-b0ba-48c9-ba8d-bfaebfa0d2c2
+		summarizeBy: none
+		sourceColumn: SESSION_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column POSITION
+		dataType: double
+		lineageTag: 0e1a7e53-11d9-44ec-ba3d-6003c64d4906
+		summarizeBy: sum
+		sourceColumn: POSITION
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NUMBER_OF_LAPS
+		dataType: double
+		formatString: 0
+		lineageTag: f5451e6f-10b8-4b2a-b999-5fde058b9196
+		summarizeBy: sum
+		sourceColumn: NUMBER_OF_LAPS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column DNF
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 86468889-0666-46d8-a8fd-25bb52f90abf
+		summarizeBy: none
+		sourceColumn: DNF
+
+		annotation SummarizationSetBy = Automatic
+
+	column DNS
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e3c0907a-4e4b-4b21-813e-eb59a0c312d4
+		summarizeBy: none
+		sourceColumn: DNS
+
+		annotation SummarizationSetBy = Automatic
+
+	column DSQ
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 6a2ccaf5-c4c8-439e-b303-0ae967949ba7
+		summarizeBy: none
+		sourceColumn: DSQ
+
+		annotation SummarizationSetBy = Automatic
+
+	column DRIVER_NUMBER
+		dataType: string
+		lineageTag: 3578ce52-5e79-4106-a57b-1fa305068a43
+		summarizeBy: none
+		sourceColumn: DRIVER_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column Q1_TIMING
+		dataType: double
+		lineageTag: 30160f7a-301f-4cb6-9a6a-6e5f9760b735
+		summarizeBy: sum
+		sourceColumn: Q1_TIMING
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Q2_TIMING
+		dataType: double
+		lineageTag: e6d7fb38-43f8-401c-a59e-68c40246ae64
+		summarizeBy: sum
+		sourceColumn: Q2_TIMING
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Q3_TIMING
+		dataType: double
+		lineageTag: 54a9e93c-635e-418e-95a0-5b36fa5d28ad
+		summarizeBy: sum
+		sourceColumn: Q3_TIMING
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column HAS_Q1
+		dataType: double
+		lineageTag: 2fe3e05c-a660-49bf-a623-c30082bf9a22
+		summarizeBy: sum
+		sourceColumn: HAS_Q1
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column HAS_Q2
+		dataType: double
+		lineageTag: afbc0acb-ee89-41ba-86cd-68b76d7abdfa
+		summarizeBy: sum
+		sourceColumn: HAS_Q2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column HAS_Q3
+		dataType: double
+		lineageTag: 1d1e3456-fcd8-4664-afc9-d2c62e34a259
+		summarizeBy: sum
+		sourceColumn: HAS_Q3
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AVG_QUALI_TIME
+		dataType: double
+		lineageTag: 165b3475-22d1-42b5-a755-d3fa2ca94d93
+		summarizeBy: sum
+		sourceColumn: AVG_QUALI_TIME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FASTEST_QUALIFYING_TIME
+		dataType: double
+		lineageTag: 2c0105c4-a479-4bce-9953-3fc2675aa71c
+		summarizeBy: sum
+		sourceColumn: FASTEST_QUALIFYING_TIME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column WINNER_FALG
+		dataType: double
+		lineageTag: 0b9a4c91-96e1-4017-b57a-0d2fcebb209c
+		summarizeBy: sum
+		sourceColumn: WINNER_FALG
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition QUALIFICATION_RESULTS = m
+		mode: directQuery
+		source =
+				let
+				    Source = Snowflake.Databases("NEBWAYZ-WE00194.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    F1_ANALYTICS_Database = Source{[Name="F1_ANALYTICS",Kind="Database"]}[Data],
+				    GOLD_Schema = F1_ANALYTICS_Database{[Name="GOLD",Kind="Schema"]}[Data],
+				    QUALIFICATION_RESULTS_Table = GOLD_Schema{[Name="QUALIFICATION_RESULTS",Kind="Table"]}[Data]
+				in
+				    QUALIFICATION_RESULTS_Table
+

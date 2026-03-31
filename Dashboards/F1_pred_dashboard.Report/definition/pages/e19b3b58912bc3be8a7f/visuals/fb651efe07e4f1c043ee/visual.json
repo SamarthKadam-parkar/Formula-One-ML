@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "fb651efe07e4f1c043ee",
+  "position": {
+    "x": 0,
+    "y": 0,
+    "z": 6000,
+    "height": 166.56254043363339,
+    "width": 162.01992569453429,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "image",
+    "objects": {
+      "image": [
+        {
+          "properties": {
+            "sourceType": {
+              "expr": {
+                "Literal": {
+                  "Value": "'imageUrl'"
+                }
+              }
+            },
+            "sourceUrl": {
+              "expr": {
+                "Literal": {
+                  "Value": "'https://images.seeklogo.com/logo-png/33/2/formula-1-logo-png_seeklogo-330361.png'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

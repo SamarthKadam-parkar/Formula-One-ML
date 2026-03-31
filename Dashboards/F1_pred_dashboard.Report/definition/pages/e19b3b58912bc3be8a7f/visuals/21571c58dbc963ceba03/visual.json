@@ -1,0 +1,218 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "21571c58dbc963ceba03",
+  "position": {
+    "x": 0,
+    "y": 1.3982385905477364,
+    "z": 0,
+    "height": 471.94676819668285,
+    "width": 897.27920649029613
+  },
+  "visual": {
+    "visualType": "pythonVisual",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "QUALIFICATION_RESULTS"
+                    }
+                  },
+                  "Property": "AVG_QUALI_TIME"
+                }
+              },
+              "queryRef": "QUALIFICATION_RESULTS (2).AVG_QUALI_TIME",
+              "nativeQueryRef": "AVG_QUALI_TIME"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "QUALIFICATION_RESULTS"
+                    }
+                  },
+                  "Property": "DRIVER_NUMBER"
+                }
+              },
+              "queryRef": "QUALIFICATION_RESULTS (2).DRIVER_NUMBER",
+              "nativeQueryRef": "DRIVER_NUMBER1"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "QUALIFICATION_RESULTS"
+                    }
+                  },
+                  "Property": "FASTEST_QUALIFYING_TIME"
+                }
+              },
+              "queryRef": "QUALIFICATION_RESULTS (2).FASTEST_QUALIFYING_TIME",
+              "nativeQueryRef": "FASTEST_QUALIFYING_TIME"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "QUALIFICATION_RESULTS"
+                    }
+                  },
+                  "Property": "SESSION_KEY"
+                }
+              },
+              "queryRef": "QUALIFICATION_RESULTS (2).SESSION_KEY",
+              "nativeQueryRef": "SESSION_KEY"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DRIVERS"
+                    }
+                  },
+                  "Property": "FULL_NAME"
+                }
+              },
+              "queryRef": "DRIVERS.FULL_NAME",
+              "nativeQueryRef": "FULL_NAME"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "script": [
+        {
+          "properties": {
+            "source": {
+              "expr": {
+                "Literal": {
+                  "Value": "'import pandas as pd\nimport matplotlib.pyplot as plt\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.cluster import KMeans\n\n# -------------------------------\n# LOAD DATA (Power BI provides ''dataset'')\n# -------------------------------\n# dataset already contains DRIVER_NUMBER, AVG_QUALI_TIME, FASTEST_QUALIFYING_TIME, POSITION, etc.\ndf = dataset.drop_duplicates()\n\n# -------------------------------\n# SELECT FEATURES (SIMPLIFIED)\n# -------------------------------\nfeature_cols = [''AVG_QUALI_TIME'', ''FASTEST_QUALIFYING_TIME'']\ndf = df.dropna(subset=feature_cols)\n\nX = df[feature_cols]\n\n# -------------------------------\n# SCALE FEATURES\n# -------------------------------\nscaler = StandardScaler()\nX_scaled = scaler.fit_transform(X)\n\n# -------------------------------\n# K-MEANS CLUSTERING\n# -------------------------------\n# Use min(n_clusters, number of samples) to avoid errors\nn_clusters = min(5, len(df))\nkmeans = KMeans(n_clusters=n_clusters, random_state=42)\ndf[''cluster''] = kmeans.fit_predict(X_scaled)\n\n# -------------------------------\n# PERFORMANCE SCORE\n# -------------------------------\ndf[''performance_score''] = 1 / df[''AVG_QUALI_TIME'']\n\n# -------------------------------\n# MAP CLUSTERS → WIN PROBABILITY\n# -------------------------------\ncluster_perf = df.groupby(''cluster'')[''performance_score''].mean()\nsorted_clusters = cluster_perf.sort_values(ascending=False)\n\nlabels = [''Best Chance'', ''High Chance'', ''Moderate Chance'', ''Low Chance'', ''Very Low Chance'']\ncluster_mapping = {cluster: labels[i] for i, cluster in enumerate(sorted_clusters.index)}\n\ndf[''win_category''] = df[''cluster''].map(cluster_mapping)\n\n# -------------------------------\n# OPTIONAL VALIDATION\n# -------------------------------\nif ''POSITION'' in df.columns:\n    df[''winner_flag''] = (df[''POSITION''] == 1).astype(int)\n    print(df.groupby(''win_category'')[''winner_flag''].mean())\n\n# -------------------------------\n# VISUALIZATION\n# -------------------------------\nimport matplotlib.pyplot as plt\nimport matplotlib.patheffects as pe\nfrom adjustText import adjust_text\nfig, ax = plt.subplots(figsize=(19, 10))\n# Style\nfig.patch.set_facecolor(''#0f0f1a'')\nax.set_facecolor(''#0f0f1a'')\nax.grid(True, color=''#ffffff15'', linewidth=0.8, zorder=0)\nfor spine in ax.spines.values():\n   spine.set_edgecolor(''#ffffff20'')\nax.tick_params(colors=''#aaaacc'', labelsize=9)\n# F1-inspired color palette\npalette = [''#e8002d'', ''#00d2be'', ''#ff8700'', ''#ffffff'', ''#0067ff'',\n          ''#900000'', ''#006f62'', ''#2b4562'', ''#b6babd'', ''#ff87bc'']\ntexts = []\nfor i, label in enumerate(df[''win_category''].unique()):\n   subset = df[df[''win_category''] == label]\n   color = palette[i % len(palette)]\n   ax.scatter(\n       subset[''AVG_QUALI_TIME''],\n       subset[''FASTEST_QUALIFYING_TIME''],\n       label=label,\n       color=color,\n       s=90,\n       edgecolors=''white'',\n       linewidths=0.5,\n       zorder=3,\n       alpha=0.92\n   )\n   if ''FULL_NAME'' in df.columns:\n       for _, row in subset.iterrows():\n           t = ax.text(\n               row[''AVG_QUALI_TIME''],\n               row[''FASTEST_QUALIFYING_TIME''],\n               str(row[''FULL_NAME'']),\n               fontsize=12,\n               color=color,\n               fontweight=''semibold'',\n               zorder=5\n           )\n           # White outline for readability on dark bg\n           t.set_path_effects([\n               pe.withStroke(linewidth=2.5, foreground=''#0f0f1a'')\n           ])\n           texts.append(t)\n# Auto-adjust labels to prevent overlaps\nadjust_text(\n   texts,\n   ax=ax,\n   expand_points=(1.6, 1.6),\n   expand_text=(1.4, 1.4),\n   arrowprops=dict(arrowstyle=''-'', color=''#ffffff40'', lw=0.8),\n   force_text=(0.5, 0.8),\n   force_points=(0.3, 0.5),\n   avoid_self=True,\n)\nax.set_xlabel(\"Average Qualifying Time\", color=''#ffffff'', fontsize=11, labelpad=10)\nax.set_ylabel(\"Fastest Qualifying Time\", color=''#ffffff'', fontsize=11, labelpad=10)\nax.set_title(\"Driver Clusters\", color=''white'', fontsize=15, fontweight=''bold'', pad=16)\nlegend = ax.legend(\n   framealpha=0.2,\n   facecolor=''#1a1a2e'',\n   edgecolor=''#ffffff30'',\n   labelcolor=''white'',\n   fontsize=12,\n   title=''Win Category'',\n   title_fontsize=14\n)\nlegend.get_title().set_color(''#aaaacc'')\nplt.tight_layout()\nplt.show()\n'"
+                }
+              }
+            },
+            "provider": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Python'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Winning Chances Clustering '"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "16D"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0.2
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "315f4095d1bb83b101fd"
+}
