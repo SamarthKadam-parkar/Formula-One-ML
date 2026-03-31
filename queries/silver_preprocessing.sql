@@ -42,8 +42,7 @@ AS
     ON D.DRIVER_NUMBER = R.driver_number 
     HAVING
     S.SESSSION_TYPE = 'Qualifying' 
-    AND 
-    S.SESSION_NAME = 'Qualifying'
+    AND S.SESSION_NAME = 'Qualifying'
 );
 
 SELECT * FROM F1_ANALYTICS.SILVER.DRIVERS;
