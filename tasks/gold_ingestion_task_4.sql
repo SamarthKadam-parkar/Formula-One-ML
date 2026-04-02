@@ -32,7 +32,7 @@ create or replace task F1_ANALYTICS.RAW.LOAD_RESULTS_TO_GOLD
                 ,COALESCE(Q2_TIMING, 999)
                 ,COALESCE(Q3_TIMING, 999)
                 ) AS FASTEST_QUALIFYING_TIME
-            ,CASE WHEN POSITION <= 3 THEN 1 ELSE 0 END AS WINNER_FALG
+            ,CASE WHEN POSITION <= 3 THEN 1 ELSE 0 END AS WINNER_FLAG
             
         FROM F1_ANALYTICS.SILVER.QUALIFYING_RESULTS
     )SRC
@@ -54,7 +54,7 @@ create or replace task F1_ANALYTICS.RAW.LOAD_RESULTS_TO_GOLD
             ,HAS_Q3
             ,AVG_QUALI_TIME
             ,FASTEST_QUALIFYING_TIME
-            ,WINNER_FALG
+            ,WINNER_FLAG
             
     )
     VALUES(
